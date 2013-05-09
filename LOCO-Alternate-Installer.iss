@@ -21,38 +21,53 @@
 AppID={#MyAppInstallerName}{#MyAppInstallerVersion}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
+VersionInfoVersion={#MyAppInstallerVersion}
 AppPublisher={#MyAppPublisher}
-AppCopyright=Â© 1998 {#MyAppPublisher}
+AppCopyright=© 1998 {#MyAppPublisher}
 LicenseFile=licence.txt
+; Start menu/screen and Desktop shortcuts
 DefaultDirName={pf}\LEGO Media\Constructive\{#MyAppName}
 DefaultGroupName=LEGO Media\{#MyAppName}
-AllowNoIcons=true
+AllowNoIcons=yes
+; Installer Graphics
 SetupIconFile=Lego.ico
 WizardImageFile=Installfig1.bmp
 WizardSmallImageFile=InnoSetup LEGO Logo.bmp
 WizardImageStretch=True
 WizardImageBackColor=clBlack
+; Location of the compiled Exe
 OutputDir=Here Lie The EXE
-OutputBaseFilename={#MyAppInstallerName}
+OutputBaseFilename={#MyAppInstallerName} {#MyAppInstallerVersion}
+; Uninstallation stuff
 UninstallFilesDir={app}
 UninstallDisplayIcon={app}\Lego.ico
 CreateUninstallRegKey=true
 UninstallDisplayName={#MyAppName}
+; Compression
 SolidCompression=True
 Compression=lzma/ultra64
 InternalCompressLevel=ultra
-AllowRootDirectory=false
+LZMAUseSeparateProcess=yes
+; From top to bottom: Allows installation to C:\ (and the like),
+; Explicitly set Admin rights, no other languages, do not restart upon finishing.
+AllowRootDirectory=yes
 PrivilegesRequired=admin
 ShowLanguageDialog=no
+RestartIfNeededByRun=no
 
 [Languages]
 Name: "English"; MessagesFile: "compiler:Default.isl"
 
 [Messages]
-English.BeveledLabel={#MyAppInstallerName}
+BeveledLabel={#MyAppInstallerName}
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "Admin"; Description: "Run {#MyAppName} with Administrator Rights"; GroupDescription: "{cm:AdditionalIcons}"
+
+[Registry]
+; Registry strings are always hard-coded (No ISPP functions) to ensure everything works properly.
+Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\LEGORacers.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue; Tasks: Admin
 
 [Files]
 Source: "{code:GetSourceDrive}Exe\loco.exe"; DestDir: "{app}\Exe"; Flags: external ignoreversion
