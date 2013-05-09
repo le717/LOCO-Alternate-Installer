@@ -74,10 +74,10 @@ Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Mi
 Source: "{code:GetSourceDrive}Exe\loco.exe"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}Exe\LEGO LOCO.scr"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}setupdir\0009\licence.txt"; DestDir: "{app}"; Flags: external ignoreversion
-Source: "{code:GetSourceDrive}Lego.ico"; DestDir: "{app}"; Flags: external ignoreversion
+Source: "Lego.ico"; DestDir: "{app}"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}Exe\LEGO.INI"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}art-res\*"; DestDir: "{app}\art-res"; Flags: external ignoreversion recursesubdirs createallsubdirs
-Source: "{code:GetSourceDrive}Video\locoIntr.avi"; DestDir: "{app}\Video"; Flags: external ignoreversion
+Source: "{code:GetSourceDrive}Video\locoIntr.avi"; DestDir: "{app}\Video"; Components: Full; Flags: external ignoreversion 
 
 [INI]
 Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "Res"; String: "{app}\ART-res"
@@ -96,9 +96,9 @@ Name: "Admin"; Description: "Run {#MyAppName} with Administrator Rights"; GroupD
 Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\LEGORacers.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue; Tasks: Admin
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{group}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; IconFilename: "{app}\Lego.ico"; IconIndex: 0
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; IconFilename: "{app}\Lego.ico"; IconIndex: 0
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; IconFilename: "{app}\Lego.ico"; IconIndex: 0; Tasks: desktopicon
 
 [Registry]
 Root: "HKLM"; Subkey: "SOFTWARE\Intelligent Games\LEGO LOCO\Path"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\Exe"; Flags: uninsdeletevalue createvalueifdoesntexist
