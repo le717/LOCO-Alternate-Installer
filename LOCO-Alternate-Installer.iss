@@ -61,13 +61,14 @@ Name: "English"; MessagesFile: "compiler:Default.isl"
 [Messages]
 BeveledLabel={#MyAppInstallerName}
 
-[Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "Admin"; Description: "Run {#MyAppName} with Administrator Rights"; GroupDescription: "{cm:AdditionalIcons}"
+; Both Types and Components sections are required to create the installation options.
+[Types]
+Name: "Full"; Description: "Full Installation (With Movies)"  
+Name: "Minimal"; Description: "Minimal Installation (Without Movies)"
 
-[Registry]
-; Registry strings are always hard-coded (No ISPP functions) to ensure everything works properly.
-Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\LEGORacers.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue; Tasks: Admin
+[Components]
+Name: "Full"; Description: "Full Installation (With Movies)"; Types: Full
+Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Minimal
 
 [Files]
 Source: "{code:GetSourceDrive}Exe\loco.exe"; DestDir: "{app}\Exe"; Flags: external ignoreversion
@@ -79,11 +80,20 @@ Source: "{code:GetSourceDrive}art-res\*"; DestDir: "{app}\art-res"; Flags: exter
 Source: "{code:GetSourceDrive}Video\locoIntr.avi"; DestDir: "{app}\Video"; Flags: external ignoreversion
 
 [INI]
-Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "Res"; String: "{app}\ART-res";
-Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "ResFile"; String: "{app}\ART-res\resource.rfh";
+Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "Res"; String: "{app}\ART-res"
+Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "ResFile"; String: "{app}\ART-res\resource.rfh"
 Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "exe"; String: "Loco.exe"
-Filename: "{app}\Exe\LEGO.INI"; Section: "Video"; Key: "Dir"; String: "{app}\Video\LocoIntr.avi"
+Filename: "{app}\Exe\LEGO.INI"; Section: "Video"; Key: "Dir"; String: "{app}\Video\LocoIntr.avi"; Components: Full
+Filename: "{app}\Exe\LEGO.INI"; Section: "Video"; Key: "Dir"; String: "{code:GetSourceDrive}\Video\LocoIntr.avi"; Components: Minimal
 Filename: "{app}\Exe\LEGO.INI"; Section: "Locale"; Key: "Language"; String: "ENGLISH"
+
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "Admin"; Description: "Run {#MyAppName} with Administrator Rights"; GroupDescription: "{cm:AdditionalIcons}"
+
+[Registry]
+; Registry strings are always hard-coded (No ISPP functions) to ensure everything works properly.
+Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\LEGORacers.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue; Tasks: Admin
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"
@@ -96,6 +106,10 @@ Root: "HKLM"; Subkey: "SOFTWARE\LEGO Media\LEGO LOCO\1.12.008"; ValueType: none;
 Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\loco.exe"; Flags: uninsdeletevalue createvalueifdoesntexist
 Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletevalue createvalueifdoesntexist
 Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\Exe\loco.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue createvalueifdoesntexist
+
+[Dirs]
+; Created to ensure the save games are not removed (which should never ever happen).
+Name: "{app}\art-res\SAVEGAME"; Flags: uninsneveruninstall
 
 [Code]
 // Pascal script from Bgbennyboy to pull files off a CD, greatly trimmed up and modified to support ANSI and Unicode Inno Setup by Triangle717.

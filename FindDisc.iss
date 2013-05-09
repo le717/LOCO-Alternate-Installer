@@ -17,6 +17,7 @@ var
 	external 'GetLogicalDriveStringsA@kernel32.dll stdcall';
 
 const
+  // ID's a LEGO LOCO disc
 	UniqueFile = 'loadfig1.bmp';
 
 	DRIVE_UNKNOWN = 0; // The drive type cannot be determined.
@@ -119,7 +120,7 @@ begin
 	begin
 		while FindUniqueFile() = '' do
 		begin
-			if MsgBox('Are you sure you inserted your LEGO LOCO disc into the computer? Please insert your disc now or press cancel to exit the Setup.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
+			if MsgBox('Is a LEGO LOCO disc inserted? If not, please insert your disc now or press cancel to exit Setup.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
 
 			else
 				Abort;
