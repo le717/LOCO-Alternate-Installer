@@ -60,6 +60,8 @@ Name: "English"; MessagesFile: "compiler:Default.isl"
 
 [Messages]
 BeveledLabel={#MyAppInstallerName}
+; DiskSpaceMBLabel is overridden because it reports an incorrect installation size.
+DiskSpaceMBLabel=At least 215 MB of free disk space is required.
 
 ; Both Types and Components sections are required to create the installation options.
 [Types]
@@ -74,10 +76,10 @@ Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Mi
 Source: "{code:GetSourceDrive}Exe\loco.exe"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}Exe\LEGO LOCO.scr"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}setupdir\0009\licence.txt"; DestDir: "{app}"; Flags: external ignoreversion
-Source: "Lego.ico"; DestDir: "{app}"; Flags: external ignoreversion
+Source: "Lego.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{code:GetSourceDrive}Exe\LEGO.INI"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}art-res\*"; DestDir: "{app}\art-res"; Flags: external ignoreversion recursesubdirs createallsubdirs
-Source: "{code:GetSourceDrive}Video\locoIntr.avi"; DestDir: "{app}\Video"; Components: Full; Flags: external ignoreversion 
+Source: "{code:GetSourceDrive}Video\locoIntr.avi"; DestDir: "{app}\Video"; Flags: external ignoreversion; Components: Full
 
 [INI]
 Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "Res"; String: "{app}\ART-res"
@@ -101,15 +103,18 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; 
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; IconFilename: "{app}\Lego.ico"; IconIndex: 0; Tasks: desktopicon
 
 [Registry]
-Root: "HKLM"; Subkey: "SOFTWARE\Intelligent Games\LEGO LOCO\Path"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\Exe"; Flags: uninsdeletevalue createvalueifdoesntexist
-Root: "HKLM"; Subkey: "SOFTWARE\LEGO Media\LEGO LOCO\1.12.008"; ValueType: none; Flags: uninsdeletevalue createvalueifdoesntexist
-Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\loco.exe"; Flags: uninsdeletevalue createvalueifdoesntexist
-Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletevalue createvalueifdoesntexist
-Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\Exe\loco.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue createvalueifdoesntexist
+Root: "HKLM"; Subkey: "SOFTWARE\Intelligent Games\LEGO LOCO"; ValueType: none; Flags: uninsdeletekey
+Root: "HKLM"; Subkey: "SOFTWARE\Intelligent Games\LEGO LOCO\Path"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\Exe"; Flags: uninsdeletevalue
+Root: "HKLM"; Subkey: "SOFTWARE\LEGO Media\LEGO LOCO"; ValueType: none; Flags: uninsdeletekey
+Root: "HKLM"; Subkey: "SOFTWARE\LEGO Media\LEGO LOCO\1.12.008"; ValueType: none; Flags: uninsdeletekey
+Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\loco.exe"; Flags: uninsdeletekey
+Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletevalue
+Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\Exe\loco.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
 
 [Dirs]
-; Created to ensure the save games are not removed (which should never ever happen).
+; Created to ensure the save games and postcards are not removed (which should never ever happen).
 Name: "{app}\art-res\SAVEGAME"; Flags: uninsneveruninstall
+Name: "{app}\art-res\POSTBAG"; Flags: uninsneveruninstall
 
 [Code]
 // Pascal script from Bgbennyboy to pull files off a CD, greatly trimmed up and modified to support ANSI and Unicode Inno Setup by Triangle717.
