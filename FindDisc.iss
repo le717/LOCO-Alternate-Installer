@@ -17,7 +17,7 @@ var
 	external 'GetLogicalDriveStringsA@kernel32.dll stdcall';
 
 const
-  // ID's a LEGO LOCO disc
+  // If this is found, it is a LEGO LOCO disc
 	UniqueFile = 'loadfig1.bmp';
 
 	DRIVE_UNKNOWN = 0; // The drive type cannot be determined.
