@@ -43,6 +43,8 @@ UninstallFilesDir={app}
 UninstallDisplayIcon={app}\Lego.ico
 CreateUninstallRegKey=true
 UninstallDisplayName={#MyAppName}
+; This is required so Inno can correctly report the installation size.
+UninstallDisplaySize=225500000
 ; Compression
 SolidCompression=True
 Compression=lzma/ultra64
