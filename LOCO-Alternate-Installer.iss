@@ -14,7 +14,7 @@
 #define MyAppInstallerName "LEGO® LOCO Alternate Installer"
 #define MyAppInstallerVersion "1.0.2"
 #define MyAppName "LEGO® LOCO"
-#define MyAppNameNoR "LEGO®LOCO"
+#define MyAppNameNoR "LEGO LOCO"
 #define MyAppVersion "1.0.18.2"
 #define MyAppPublisher "LEGO International Ltd."
 #define MyAppExeName "loco.exe"
