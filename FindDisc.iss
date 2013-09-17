@@ -1,4 +1,4 @@
-//LEGO LOCO Alternate Installer V1.0.1
+//LEGO LOCO Alternate Installer V1.0.2
 //Created 2013 Triangle717
 //<http://triangle717.wordpress.com/>
 //Contains source code from Grim Fandango Setup
