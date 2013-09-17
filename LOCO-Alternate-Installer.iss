@@ -46,7 +46,7 @@ UninstallDisplayIcon={app}\Lego.ico
 CreateUninstallRegKey=true
 UninstallDisplayName={#MyAppName}
 ; This is required so Inno can correctly report the installation size.
-UninstallDisplaySize=225500000
+UninstallDisplaySize=218103808
 ; Compression
 SolidCompression=True
 Compression=lzma/ultra64
@@ -64,7 +64,7 @@ Name: "English"; MessagesFile: "compiler:Default.isl"
 [Messages]
 BeveledLabel={#MyAppInstallerName}
 ; DiskSpaceMBLabel is overridden because it reports an incorrect installation size.
-DiskSpaceMBLabel=At least 215 MB of free disk space is required.
+DiskSpaceMBLabel=At least 208 MB of free disk space is required.
 
 ; Both Types and Components sections are required to create the installation options.
 [Types]
