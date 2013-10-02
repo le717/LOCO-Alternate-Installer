@@ -11,7 +11,7 @@
   #error You must use Inno Setup 5.5.2 or newer to compile this script
 #endif
        
-#define MyAppInstallerName "LEGO® LOCO Alternate Installer - Preview"
+#define MyAppInstallerName "LEGO® LOCO Alternate Installer"
 #define MyAppInstallerVersion "1.0.3"
 #define MyAppName "LEGO® LOCO"
 #define MyAppNameNoR "LEGO LOCO"
