@@ -18,10 +18,12 @@ var
 
   
 const
-  // First (and most likely to succeed) way to detect a LOCO disc
+  // First (and most likely to succeed) file to detect a LOCO disc
 	UniqueFile_1 = 'Exe\loco.exe';
-  // Backup method to detect a LOCO disc
+  // Second file to detect a LOCO disc
 	UniqueFile_2 = 'loadfig1.bmp';
+	// Third and final file to detect a LOCO disc
+	UniqueFile_3 = 'c-dilla1.bmp';
 
 	DRIVE_UNKNOWN = 0; // The drive type cannot be determined.
 	DRIVE_NO_ROOT_DIR = 1; // The root path is invalid. For example, no volume is mounted at the path.
