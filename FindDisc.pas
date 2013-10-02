@@ -109,6 +109,13 @@ begin
 			exit;
 		end
     else
+    // The third file on a LOCO disc was detected
+    if FileExists( DrvLetters[i] + UniqueFile_3) then
+		begin
+			result:=DrvLetters[i];
+			exit;
+		end
+    else
 
 	end;
 
