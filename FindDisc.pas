@@ -1,6 +1,6 @@
 //LEGO LOCO Alternate Installer V1.0.3 
 //Created 2013 Triangle717
-//<http://triangle717.wordpress.com/>
+//<http://Triangle717.WordPress.com/>
 //Contains source code from Grim Fandango Setup
 //Copyright (c) 2007-2008 Bgbennyboy
 //<http://quick.mixnmojo.com/>
@@ -16,9 +16,12 @@ var
 	function GetLogicalDriveStrings( nLenDrives: LongInt; lpDrives: AnsiString ): Integer;
 	external 'GetLogicalDriveStringsA@kernel32.dll stdcall';
 
+  
 const
-  // If this is found, it is a LEGO LOCO disc
-	UniqueFile = 'Exe\loco.exe';
+  // First (and most likely to succeed) way to detect a LOCO disc
+	UniqueFile_1 = 'Exe\loco.exe';
+  // Backup method to detect a LOCO disc
+	UniqueFile_2 = 'loadfig1.bmp';
 
 	DRIVE_UNKNOWN = 0; // The drive type cannot be determined.
 	DRIVE_NO_ROOT_DIR = 1; // The root path is invalid. For example, no volume is mounted at the path.
@@ -90,12 +93,20 @@ var
 begin
 	for i:=0 to GetArrayLength(DrvLetters) -1 do
 	begin
-		if FileExists( DrvLetters[i] + UniqueFile) then
+    // The first file on a LOCO was detected
+		if FileExists( DrvLetters[i] + UniqueFile_1) then
 		begin
 			result:=DrvLetters[i];
 			exit;
 		end
 		else
+    // The second file on a LOCO disc was detected
+    if FileExists( DrvLetters[i] + UniqueFile_2) then
+		begin
+			result:=DrvLetters[i];
+			exit;
+		end
+    else
 
 	end;
 

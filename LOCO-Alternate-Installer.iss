@@ -1,6 +1,6 @@
 ; LEGO LOCO Alternate Installer V1.0.3
 ; Created 2013 Triangle717
-; <http://triangle717.wordpress.com/>
+; <http://Triangle717.WordPress.com/>
 ; Contains source code from Grim Fandango Setup
 ; Copyright (c) 2007-2008 Bgbennyboy
 ; <http://quick.mixnmojo.com/>
@@ -123,7 +123,7 @@ Name: "{app}\art-res\POSTBAG"; Flags: uninsneveruninstall
 var
   SourceDrive: string;
 
-#include "FindDisc.iss"
+#include "FindDisc.pas"
 
 function GetSourceDrive(Param: String): String;
 begin
