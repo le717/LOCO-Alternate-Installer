@@ -134,18 +134,19 @@ begin
 
 	if FindUniqueFile() <> '' then
 	begin
-// 		MsgBox('Found!!!!', mbError, MB_OK);
+// 		MsgBox('', mbError, MB_OK);
 	end
 	else
 	begin
 		while FindUniqueFile() = '' do
 		begin
-			if MsgBox('Is a LEGO LOCO disc inserted? If not, please insert your disc now or press cancel to exit Setup.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
+			if MsgBox('Is a LEGO® LOCO disc inserted? If not, please insert your disc now or press cancel to exit Setup.', mbConfirmation, MB_OKCANCEL or MB_DEFBUTTON1) = IDOK then
 
 			else
 				Abort;
 		end;
 	end;
 
-	Result:=FindUniqueFile(); //Not a nice way of doing things at all but it'll do for now
+  //Not a nice way of doing things at all
+	Result:=FindUniqueFile(); 
 end;

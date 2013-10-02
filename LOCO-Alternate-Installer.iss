@@ -65,6 +65,9 @@ Name: "English"; MessagesFile: "compiler:Default.isl"
 BeveledLabel={#MyAppInstallerName}
 ; DiskSpaceMBLabel is overridden because it reports an incorrect installation size.
 DiskSpaceMBLabel=At least 208 MB of free disk space is required.
+; Overwrite the finished installation messages
+FinishedHeadingLabel=[name] has been installed
+FinishedLabelNoIcons=Setup has finished installing [name] on your computer.%nYou will need to change your computer's screen resolution before playing.%nFor complete details, please visit http://wp.me/p1V5ge-br
 
 ; Both Types and Components sections are required to create the installation options.
 [Types]
@@ -76,32 +79,32 @@ Name: "Full"; Description: "Full Installation (With Movies)"; Types: Full
 Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Minimal
 
 [Files]
+; Icon and PDF manual from 2001 rerelease
 Source: "Lego.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manual.pdf"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
+; Grab the files off the disc
 Source: "{code:GetSourceDrive}setupdir\0009\licence.txt"; DestDir: "{app}"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}Exe\*"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}art-res\*"; DestDir: "{app}\art-res"; Flags: external ignoreversion recursesubdirs createallsubdirs
+; Install the intro video only if user choose to do so
 Source: "{code:GetSourceDrive}Video\locoIntr.avi"; DestDir: "{app}\Video"; Flags: external ignoreversion; Components: Full
 
 [INI]
+; Write LEGO.INI
 Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "Res"; String: "{app}\ART-res"
 Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "ResFile"; String: "{app}\ART-res\resource.rfh"
 Filename: "{app}\Exe\LEGO.INI"; Section: "DIRECTORIES"; Key: "exe"; String: "Loco.exe"
+; Write path to video on the HDD if it was installed
 Filename: "{app}\Exe\LEGO.INI"; Section: "Video"; Key: "Dir"; String: "{app}\Video\LocoIntr.avi"; Components: Full
+; Otherwise, write path to video on the disc
 Filename: "{app}\Exe\LEGO.INI"; Section: "Video"; Key: "Dir"; String: "{code:GetSourceDrive}\Video\LocoIntr.avi"; Components: Minimal
 Filename: "{app}\Exe\LEGO.INI"; Section: "Locale"; Key: "Language"; String: "ENGLISH"
 
-[Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "Admin"; Description: "Run {#MyAppName} with Administrator Rights"; GroupDescription: "{cm:AdditionalIcons}"
-
-[Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; IconFilename: "{app}\Lego.ico"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; IconFilename: "{app}\Lego.ico"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; IconFilename: "{app}\Lego.ico"; Tasks: desktopicon
-
 [Registry]
 ; Registry strings are always hard-coded (!No ISPP functions!) to ensure everything works properly.
+; 2001 rerelease requires both LEGO.INI and Registry strinsg to run. 
+; Original release only needs LEGO.INI.
+; Do these have any adverse side-effects on 1998 copy, and can they not be installed if a 1998 copy is being used?
 Root: "HKLM"; Subkey: "SOFTWARE\Intelligent Games\LEGO LOCO"; ValueType: none; Flags: uninsdeletekey
 Root: "HKLM"; Subkey: "SOFTWARE\Intelligent Games\LEGO LOCO\Path"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\Exe"; Flags: uninsdeletevalue
 Root: "HKLM"; Subkey: "SOFTWARE\LEGO Media\LEGO LOCO"; ValueType: none; Flags: uninsdeletekey
@@ -109,6 +112,19 @@ Root: "HKLM"; Subkey: "SOFTWARE\LEGO Media\LEGO LOCO\1.12.008"; ValueType: none;
 Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "(Default)"; ValueData: "{app}\loco.exe"; Flags: uninsdeletekey
 Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\loco.exe"; ValueType: String; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletevalue
 Root: "HKCU"; Subkey: "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"; ValueType: string; ValueName: "{app}\Exe\loco.exe"; ValueData: "RUNASADMIN"; Flags: uninsdeletevalue
+
+[Tasks]
+; Create a Destkop icon, run with Administrator rights
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "Admin"; Description: "Run {#MyAppName} with Administrator Rights"; GroupDescription: "{cm:AdditionalIcons}"
+
+[Icons]
+; Start Menu/Screen shortcuts
+Name: "{group}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; IconFilename: "{app}\Lego.ico"
+; Add shortcut to manual
+Name: "{group}\{#MyAppName} Manual"; Filename: "{app}\Manual.pdf";
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"; IconFilename: "{app}\Lego.ico"
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\Exe\{#MyAppExeName}"; IconFilename: "{app}\Lego.ico"; Tasks: desktopicon
 
 [Dirs]
 ; Created to ensure the save games and postcards are not removed 
