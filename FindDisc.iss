@@ -1,4 +1,4 @@
-//LEGO LOCO Alternate Installer V1.0.2
+//LEGO LOCO Alternate Installer V1.0.3 
 //Created 2013 Triangle717
 //<http://triangle717.wordpress.com/>
 //Contains source code from Grim Fandango Setup
@@ -18,7 +18,7 @@ var
 
 const
   // If this is found, it is a LEGO LOCO disc
-	UniqueFile = 'loadfig1.bmp';
+	UniqueFile = 'Exe\loco.exe';
 
 	DRIVE_UNKNOWN = 0; // The drive type cannot be determined.
 	DRIVE_NO_ROOT_DIR = 1; // The root path is invalid. For example, no volume is mounted at the path.

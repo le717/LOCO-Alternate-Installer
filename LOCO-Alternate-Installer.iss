@@ -1,4 +1,4 @@
-; LEGO LOCO Alternate Installer V1.0.2
+; LEGO LOCO Alternate Installer V1.0.3
 ; Created 2013 Triangle717
 ; <http://triangle717.wordpress.com/>
 ; Contains source code from Grim Fandango Setup
@@ -11,8 +11,8 @@
   #error You must use Inno Setup 5.5.2 or newer to compile this script
 #endif
        
-#define MyAppInstallerName "LEGO® LOCO Alternate Installer"
-#define MyAppInstallerVersion "1.0.2"
+#define MyAppInstallerName "LEGO® LOCO Alternate Installer - Preview"
+#define MyAppInstallerVersion "1.0.3"
 #define MyAppName "LEGO® LOCO"
 #define MyAppNameNoR "LEGO LOCO"
 #define MyAppVersion "1.0.18.2"
@@ -78,10 +78,8 @@ Name: "Minimal"; Description: "Minimal Installation (Without Movies)"; Types: Mi
 [Files]
 Source: "Lego.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manual.pdf"; DestDir: "{app}"; Flags: ignoreversion skipifsourcedoesntexist
-Source: "{code:GetSourceDrive}Exe\loco.exe"; DestDir: "{app}\Exe"; Flags: external ignoreversion
-Source: "{code:GetSourceDrive}Exe\LEGO LOCO.scr"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}setupdir\0009\licence.txt"; DestDir: "{app}"; Flags: external ignoreversion
-Source: "{code:GetSourceDrive}Exe\LEGO.INI"; DestDir: "{app}\Exe"; Flags: external ignoreversion
+Source: "{code:GetSourceDrive}Exe\*"; DestDir: "{app}\Exe"; Flags: external ignoreversion
 Source: "{code:GetSourceDrive}art-res\*"; DestDir: "{app}\art-res"; Flags: external ignoreversion recursesubdirs createallsubdirs
 Source: "{code:GetSourceDrive}Video\locoIntr.avi"; DestDir: "{app}\Video"; Flags: external ignoreversion; Components: Full
 
@@ -121,6 +119,7 @@ Name: "{app}\art-res\POSTBAG"; Flags: uninsneveruninstall
 [Code]
 // Pascal script from Bgbennyboy to pull files off a CD, greatly trimmed up 
 // and modified to support ANSI and Unicode Inno Setup by Triangle717.
+// https://github.com/bgbennyboy/Grim-Fandango-Setup-and-Launcher
 var
   SourceDrive: string;
 
