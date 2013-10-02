@@ -163,9 +163,11 @@ pip-log.txt
 .DS_Store
 
 
-Here Lie The Exe/*
-*.~is
+Here Lie The Exe/
 Compile/
+Archives/
+bin/
+*.~is
 *.icd
 *.bat
 *.zip
