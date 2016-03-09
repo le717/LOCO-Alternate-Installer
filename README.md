@@ -1,12 +1,12 @@
-LEGO:registered: LOCO Alternate Installer
-=========================================
+# LEGO:registered: LOCO Alternate Installer #
 
-An alternate installer for _LEGO® LOCO_, written using [Inno Setup](http://www.jrsoftware.org/isinfo.php)
+An alternate installer for _LEGO® LOCO_, written using [Inno Setup](http://www.jrsoftware.org/isinfo.php) 
 to replace the original 16-bit InstallShield installer.
 
-This project uses code from [bgbennyboy](https://github.com/bgbennyboy)'s [*Grim Fandango Setup*](https://github.com/bgbennyboy/Grim-Fandango-Setup-and-Launcher)
-to pull the files off the disc, modified by Triangle717 to support ANSI and Unicode Inno Setup.
+This project uses code from [@bgbennyboy](https://github.com/bgbennyboy)'s [*Grim Fandango Setup*](https://github.com/bgbennyboy/Grim-Fandango-Setup-and-Launcher)
+to pull the files off the disc, modified to support both ANSI and Unicode Inno Setup.
 
-License
--------
-***LEGO:registered: LOCO Alternate Installer*, created 2013 [Triangle717](http://Triangle717.WordPress.com).**
+## License ##
+[MIT](LICENSE)
+
+2013-2016 Caleb Ely
